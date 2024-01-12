@@ -16,12 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className='flex'>
         {/* Sidebar */}
 
         {/* ClinetProvider - Notification */}
 
-        <div>{children}</div>
+        <div className='bg-[#343541] flex-1'>{children}</div>
       </body>
     </html>
   )

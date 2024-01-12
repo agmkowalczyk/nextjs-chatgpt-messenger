@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { getServerSession } from 'next-auth/next'
-import { authOptions } from './auth/[...nextauth]'
-import SessionProvider from '@/components/SessionProvider'
+import { authOptions } from './api/auth/[...nextauth]/route'
+import Provider from '@/components/SessionProvider'
 import SideBar from '@/components/SideBar'
+import Login from '@/components/Login'
 
 import './globals.css'
 
@@ -23,16 +24,22 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
-      <body className='flex'>
-        <SessionProvider session={session}>
-          <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto md:min-w-[15rem]'>
-            <SideBar />
-          </div>
+      <body>
+        <Provider session={session}>
+          {!session ? (
+            <Login />
+          ) : (
+            <div className='flex'>
+              <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto md:min-w-[15rem]'>
+                  <SideBar />
+              </div>
 
-          {/* ClinetProvider - Notification */}
+              {/* ClinetProvider - Notification */}
 
-          <div className='bg-[#343541] flex-1'>{children}</div>
-        </SessionProvider>
+              <div className='bg-[#343541] flex-1'>{children}</div>
+            </div>
+          )}
+        </Provider>
       </body>
     </html>
   )

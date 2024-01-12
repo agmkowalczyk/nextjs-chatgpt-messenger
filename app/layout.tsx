@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import SideBar from '@/components/SideBar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className='flex'>
-        {/* Sidebar */}
+        <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto md:min-w-[15rem]'>
+          <SideBar />
+        </div>
 
         {/* ClinetProvider - Notification */}
 

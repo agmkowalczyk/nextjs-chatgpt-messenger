@@ -1,10 +1,22 @@
 'use client'
 
 import { useSession, signOut } from 'next-auth/react'
+import { useCollection } from 'react-firebase-hooks/firestore'
+import { collection, orderBy, query } from 'firebase/firestore'
+import { db } from '@/firebase'
 import NewChat from './NewChat'
+
 
 const SideBar = () => {
   const { data: session } = useSession()
+
+  const [chats, loading, error] = useCollection(
+    session &&
+      query(
+        collection(db, 'users', session?.user?.email!, 'chats'),
+        orderBy('createdAt', 'desc')
+      )
+  )
 
   return (
     <aside className='p-2 flex flex-col h-screen'>
@@ -12,7 +24,8 @@ const SideBar = () => {
         <div>
           <NewChat />
           <div>model selection</div>
-          chat rows
+
+
         </div>
       </div>
 

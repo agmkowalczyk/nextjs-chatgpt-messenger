@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react'
 import { PaperAirplaneIcon } from '@heroicons/react/24/solid'
 import { useSession } from 'next-auth/react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { db } from '@/firebase'
+import { db } from '@/lib/firebase'
 import toast from 'react-hot-toast'
 
 const ChatInput = ({ chatId }: { chatId: string }) => {
@@ -13,8 +13,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
 
   const user = session?.user
 
-  // use SWR to get model
-  const model = 'text-davinci-003'
+  const model = 'gpt-3.5-turbo-1106'
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -46,21 +45,17 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
       message
     )
 
-    // Toast notification
-
     const notification = toast.loading('ChatGPT is thinking...')
 
     try {
-      const response = await fetch('/api/askQuestion', {
+      await fetch('/api/ask-question', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-          body: JSON.stringify({ prompt: input, chatId, model, session }),
-        
+        body: JSON.stringify({ prompt: input, chatId, model, session }),
       })
       toast.success('ChatGTP has responded!', { id: notification })
-      // const result = response.json()
     } catch (error) {}
   }
 

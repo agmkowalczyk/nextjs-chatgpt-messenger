@@ -7,6 +7,7 @@ import SideBar from '@/components/SideBar'
 import Login from '@/components/Login'
 
 import './globals.css'
+import ClientProvider from '@/components/ClientProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -31,10 +32,10 @@ export default async function RootLayout({
           ) : (
             <div className='flex'>
               <div className='bg-[#202123] max-w-xs h-screen overflow-y-auto md:min-w-[15rem]'>
-                  <SideBar />
+                <SideBar />
               </div>
 
-              {/* ClinetProvider - Notification */}
+              <ClientProvider />
 
               <div className='bg-[#343541] flex-1'>{children}</div>
             </div>

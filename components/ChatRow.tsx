@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import { collection, deleteDoc, doc } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { ChatBubbleLeftIcon, TrashIcon } from '@heroicons/react/24/outline'
-import { db } from '@/firebase'
+import { db } from '@/lib/firebase'
 
 const ChatRow = ({ id }: { id: string }) => {
   const pathname = usePathname()

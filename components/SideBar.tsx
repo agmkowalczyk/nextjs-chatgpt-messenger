@@ -6,6 +6,7 @@ import { collection, orderBy, query } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import NewChat from './NewChat'
 import ChatRow from './ChatRow'
+import ModelSelection from './ModelSelection'
 
 const SideBar = () => {
   const { data: session } = useSession()
@@ -23,11 +24,21 @@ const SideBar = () => {
       <div className='flex-1'>
         <div>
           <NewChat />
-          <div>model selection</div>
+          <div className='hidden md:inline'>
+            <ModelSelection />
+          </div>
 
-          {chats?.docs.map((chat) => (
-            <ChatRow key={chat.id} id={chat.id} />
-          ))}
+          <div className='flex flex-col space-y-2 my-2'>
+            {loading && (
+              <div className='animate-pulse text-center text-white'>
+                <p>Loading Chats...</p>
+              </div>
+            )}
+
+            {chats?.docs.map((chat) => (
+              <ChatRow key={chat.id} id={chat.id} />
+            ))}
+          </div>
         </div>
       </div>
 

@@ -6,6 +6,8 @@ import { useSession } from 'next-auth/react'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import toast from 'react-hot-toast'
+import useSWR from 'swr'
+import ModelSelection from './ModelSelection'
 
 const ChatInput = ({ chatId }: { chatId: string }) => {
   const [prompt, setPrompt] = useState('')
@@ -13,7 +15,9 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
 
   const user = session?.user
 
-  const model = 'gpt-3.5-turbo-1106'
+  const { data: model } = useSWR('model', {
+    fallbackData: 'gpt-3.5-turbo-1106',
+  })
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -79,7 +83,9 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
         </button>
       </form>
 
-      <div>modal</div>
+      <div className='md:hidden'>
+        <ModelSelection />
+      </div>
     </div>
   )
 }

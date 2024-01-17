@@ -1,3 +1,25 @@
+# NEXT.js ChatGPT Messenger
+
+## Description
+ChatGPT Messenger (Next.js, React, TypeScript, Firebase, TailwindCSS, OpenAI API, auth)
+
+<p>
+<img src="https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white" alt="openai">
+<img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" alt="next.js">
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="react">
+<img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript">
+<img src="https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase" alt="firebase">
+<img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="tailwind">
+</p>
+
+## Image
+
+![preview](https://github.com/agmkowalczyk/nextjs-chatgpt-messenger/blob/main/screenshots/nextjs-chat-gpt-messenger-1.png "NEXT.js ChatGPT Messenger")
+
+\
+\
+\
+<br>
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

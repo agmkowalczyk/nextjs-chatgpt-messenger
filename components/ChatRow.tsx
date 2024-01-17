@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { collection, deleteDoc, doc } from 'firebase/firestore'
+import { collection, deleteDoc, doc, orderBy, query } from 'firebase/firestore'
 import { useCollection } from 'react-firebase-hooks/firestore'
 import { ChatBubbleLeftIcon, TrashIcon } from '@heroicons/react/24/outline'
 import { db } from '@/lib/firebase'
@@ -16,9 +16,11 @@ const ChatRow = ({ id }: { id: string }) => {
   const [active, setActive] = useState(false)
 
   const [messages] = useCollection(
-    collection(db, 'users', session?.user?.email!, 'chats', id, 'messages')
-  )
-
+    query(
+      collection(db, 'users', session?.user?.email!, 'chats', id, 'messages'),
+      orderBy('createdAt', 'asc')
+    ))
+    
   useEffect(() => {
     if (!pathname) return
 
@@ -29,6 +31,7 @@ const ChatRow = ({ id }: { id: string }) => {
     await deleteDoc(doc(db, 'users', session?.user?.email!, 'chats', id))
     router.replace('/')
   }
+  
   return (
     <Link
       href={`/chat/${id}`}
@@ -36,7 +39,7 @@ const ChatRow = ({ id }: { id: string }) => {
     >
       <ChatBubbleLeftIcon className='h-5 w-5' />
       <p className='flex-1 hidden md:inline-flex truncate'>
-        {messages?.docs[messages.docs.length - 1]?.data().text || 'New Chat'}
+        {messages?.docs[0]?.data().text || 'New Chat'}
       </p>
       <TrashIcon
         onClick={removeChat}

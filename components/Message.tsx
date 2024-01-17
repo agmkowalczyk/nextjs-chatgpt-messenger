@@ -11,7 +11,7 @@ const Message = ({ message }: { message: DocumentData }) => {
           alt=''
           className='h-8 w-8'
         />
-        <p className='pt-1 text-sm{'>{message.text}</p>
+        <p className='pt-1 text-sm'>{message.text}</p>
       </div>
     </div>
   )
